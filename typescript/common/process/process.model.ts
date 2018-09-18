@@ -1,10 +1,10 @@
 import { Process } from "./process.interface";
 import { CmdLineOptionDefinition } from "../../cmdline/cmdline.optiondefinition";
 
-export class ProcessModel 
+export class ProcessModel
 {
     private processCode: string;
-    private processClassType: Process;
+    private processClassType: any;
 
     /**
      * Process-specific custom command-line parameters
@@ -12,7 +12,7 @@ export class ProcessModel
     private processCmdLineOptionDefinitions: Array<CmdLineOptionDefinition>;
 
     constructor(processCode: string, 
-        processClassType: Process, processCmdLineOptionDefinitions?: Array<CmdLineOptionDefinition>)
+        processClassType: any, processCmdLineOptionDefinitions?: Array<CmdLineOptionDefinition>)
     {
         this.processCode = processCode;
         this.processClassType = processClassType;
@@ -23,5 +23,11 @@ export class ProcessModel
     {
         return this.processCode;
     }
+
+    public getProcessClassType(): Process
+    {
+        return this.processClassType;
+    }
+
 }
 

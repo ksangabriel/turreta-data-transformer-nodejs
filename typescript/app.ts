@@ -17,6 +17,7 @@ import { AppConfiguration } from "./configuration/app.configuration";
 import container from "./configuration/inversify.config";
 import TYPES from "./configuration/types";
 import { CmdLineManager } from "./cmdline/cmdline.manager";
+import { Process } from "./common/process/process.interface";
 
 let cmdLineManager: CmdLineManager = container.get<CmdLineManager>(TYPES.CmdLineManager);
 
@@ -39,6 +40,8 @@ for(let process of appConfiguration.getConfig().processList)
     if(process.getProcessCode() === processCode)
     {
       console.log("Found!");
+      let oo = new process.getProcessClassType();
+      console.log('oo:' + JSON.stringify(oo));
     }
 }
 
