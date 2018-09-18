@@ -1,5 +1,5 @@
 import { ExportMe } from "./common/test";
-import { XmlParser } from "./common/parsers/xmlparser";
+import { XmlParser } from "./common/parsers/xml/xmlparser";
 import { Parser } from "xml2js";
 import commandLineArgs = require('command-line-args');
 import { OptionDefinition, CommandLineOptions, ParseOptions } from "command-line-args";
@@ -25,7 +25,7 @@ console.log(options);
 let processCode = options['process-code'];
 let appConfig: AppConfiguration = new AppConfiguration();
 
-let checkProcessCode = processCodeParam => appConfig.config.processList.some( ({process_code}) => process_code === processCodeParam)
+let checkProcessCode = processCodeParam => appConfig.getConfig().processList.some( ({process_code}) => process_code === processCodeParam)
 
 if(!checkProcessCode(processCode))
 {

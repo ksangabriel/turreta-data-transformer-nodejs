@@ -5,17 +5,23 @@ import { ProcessModel } from "../common/process/process.model";
 export class AppConfiguration
 {
 
+    /**
+     * Process Definitions
+     */
     private processList: Array<ProcessModel> = [
         new ProcessModel('THIS_01', MyCustomProcess01)
     ];
 
+    /**
+     * Global custom command-line parameters
+     */
     private customCmdLineOptionDefinition: Array<CmdLineOptionDefinition> = [
-        new CmdLineOptionDefinition({ name: 'process-code1', type: String}, true),
-        new CmdLineOptionDefinition({ name: 'output-dir1', type: String}, true),
-        new CmdLineOptionDefinition( { name: 'input-file1', type: String}, true),
+        new CmdLineOptionDefinition({ name: 'custom-global-param-01', type: String}, true),
+        new CmdLineOptionDefinition({ name: 'custom-global-param-02', type: String}, true),
+        new CmdLineOptionDefinition( { name: 'custom-global-param-03', type: String}, true),
     ];
 
-    private getConfig(): any
+    public getConfig(): any
     {
         let config = {
             processList: this.processList,

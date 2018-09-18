@@ -7,5 +7,4 @@ export class CmdLineManager
         new CmdLineOptionDefinition({ name: 'output-dir', type: String}, true),
         new CmdLineOptionDefinition( { name: 'input-file', type: String}, true),
     ];
-
 }
