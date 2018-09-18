@@ -5,6 +5,15 @@ import commandLineArgs = require('command-line-args');
 import { OptionDefinition, CommandLineOptions, ParseOptions } from "command-line-args";
 import { AppConfiguration } from "./configuration/app.configuration";
 
+/**
+ * TODOS:
+ * 
+ * 1. Need an IOC/DI container
+ * 2. For a particular process code, check default global, custom global, and process-specific command-line parameters
+ * 3. Use environment variables?
+ */
+
+
 let t : OptionDefinition;
 
 const optionDefinitions : commandLineArgs.OptionDefinition[] = [
