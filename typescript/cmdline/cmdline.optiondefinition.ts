@@ -18,5 +18,15 @@ export class CmdLineOptionDefinition
         this.optionDefinition = optionDefinition;
         this.mandatory = mandatory;
     }
+
+    public getMandatory(): boolean
+    {
+        return this.mandatory;
+    }
+
+    public getOptionDefinition(): commandLineArgs.OptionDefinition
+    {
+        return this.optionDefinition;
+    }
     
 }

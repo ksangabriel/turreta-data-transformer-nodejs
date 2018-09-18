@@ -1,8 +1,15 @@
 import { MyCustomProcess01 } from "../custom/mycustom.process";
 import { CmdLineOptionDefinition } from "../cmdline/cmdline.optiondefinition";
 import { ProcessModel } from "../common/process/process.model";
+import { injectable } from "inversify";
 
-export class AppConfiguration
+export interface AppConfiguration
+{
+    getConfig(): any;
+}
+
+@injectable()
+export class AppConfigurationImpl implements AppConfiguration
 {
 
     /**

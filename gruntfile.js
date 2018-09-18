@@ -4,13 +4,13 @@ module.exports = function(grunt)
 		
 		grunt.initConfig({
 			ts: {
-				main: {
-					src:['typescript/**/*.ts'],
+			  main : {
+				tsconfig: './tsconfig.json',
+				src:['typescript/**/*.ts'],
 					dest:'dist/'
-				}
-			},
-		});
-		
-		
-		grunt.registerTask('default', ['ts']);
+			  }
+			}
+		  });
+		  grunt.loadNpmTasks("grunt-ts");
+		  grunt.registerTask("default", ["ts"]);
 }

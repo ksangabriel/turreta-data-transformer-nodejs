@@ -18,5 +18,10 @@ export class ProcessModel
         this.processClassType = processClassType;
         this.processCmdLineOptionDefinitions = processCmdLineOptionDefinitions;
     }
+
+    public getProcessCode(): string
+    {
+        return this.processCode;
+    }
 }
 
