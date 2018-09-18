@@ -2,6 +2,7 @@ import { MyCustomProcess01 } from "../custom/mycustom.process";
 import { CmdLineOptionDefinition } from "../cmdline/cmdline.optiondefinition";
 import { ProcessModel } from "../common/process/process.model";
 import { injectable } from "inversify";
+import { Creator } from "../common/instance.loader";
 
 export interface AppConfiguration
 {
@@ -16,8 +17,9 @@ export class AppConfigurationImpl implements AppConfiguration
      * Process Definitions
      */
     private processList: Array<ProcessModel> = [
-        new ProcessModel('THIS_01', MyCustomProcess01)
+        new ProcessModel('THIS_01', new Creator(MyCustomProcess01).getNew())
     ];
+
 
     /**
      * Global custom command-line parameters

@@ -7,3 +7,4 @@ export class MyCustomProcess01 implements Process
         return 'MyCustomProcess01';
     }
 }
+

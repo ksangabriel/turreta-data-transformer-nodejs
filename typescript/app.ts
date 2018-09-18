@@ -1,9 +1,13 @@
-import { ExportMe } from "./common/test";
 import { XmlParser } from "./common/parsers/xml/xmlparser";
 import { Parser } from "xml2js";
 import commandLineArgs = require('command-line-args');
 import { OptionDefinition, CommandLineOptions, ParseOptions } from "command-line-args";
 import { AppConfiguration } from "./configuration/app.configuration";
+
+import container from "./configuration/inversify.config";
+import TYPES from "./configuration/types";
+import { CmdLineManager } from "./cmdline/cmdline.manager";
+import { Process } from "./common/process/process.interface";
 
 /**
  * TODOS:
@@ -12,12 +16,6 @@ import { AppConfiguration } from "./configuration/app.configuration";
  * 2. For a particular process code, check default global, custom global, and process-specific command-line parameters
  * 3. Use environment variables?
  */
-
-
-import container from "./configuration/inversify.config";
-import TYPES from "./configuration/types";
-import { CmdLineManager } from "./cmdline/cmdline.manager";
-import { Process } from "./common/process/process.interface";
 
 let cmdLineManager: CmdLineManager = container.get<CmdLineManager>(TYPES.CmdLineManager);
 
@@ -35,17 +33,19 @@ let appConfiguration = container.get<AppConfiguration>(TYPES.AppConfiguration);
 
 let processCode = options['process-code'];
 
+let process: Process = null;
+
 for(let process of appConfiguration.getConfig().processList)
 {
     if(process.getProcessCode() === processCode)
     {
       console.log("Found!");
-      let oo = new process.getProcessClassType();
-      console.log('oo:' + JSON.stringify(oo));
+
+      process = process.getProcessClassType();
     }
 }
 
-console.log(options);
+console.log(process.getName());
 
 
 let appConfig: AppConfiguration = appConfiguration;
