@@ -13,7 +13,7 @@ export class ProcessModel
     private processCmdLineOptionDefinitions: Array<CmdLineOptionDefinition>;
 
     constructor(processCode: string, 
-        processClassType: () => Container, processCmdLineOptionDefinitions?: Array<CmdLineOptionDefinition>)
+        processClassType: () => Container, processCmdLineOptionDefinitions: Array<CmdLineOptionDefinition>)
     {
         this.processCode = processCode;
         this.processCmdLineOptionDefinitions = processCmdLineOptionDefinitions;
@@ -23,6 +23,11 @@ export class ProcessModel
     public getProcessCode(): string
     {
         return this.processCode;
+    }
+
+    public getprocessCmdLineOptionDefinitions(): Array<CmdLineOptionDefinition>
+    {
+        return this.processCmdLineOptionDefinitions;
     }
 
     public getContainer(): Container

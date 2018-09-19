@@ -10,28 +10,30 @@ import { CmdLineManager } from "./cmdline/cmdline.manager";
 import { Process } from "./common/process/process.interface";
 import { Container, interfaces } from "inversify";
 import { ProcessModel } from "./common/process/process.model";
+import { ProcessController } from "./common/process/process.controller";
 
 
 class MainClass {
   public main(): number {
 
-    ///
-
+    /* Start - retrieve objects from container that are needed in this method */
     let cmdLineManager: CmdLineManager = container.get<CmdLineManager>(TYPES.CmdLineManager);
-
-    let optionDefinitions: commandLineArgs.OptionDefinition[] = [];
-
-    for (let option of cmdLineManager.getCmdLineOptionDefinitions()) {
-      optionDefinitions.push(option.getOptionDefinition());
-    }
-
-    const options = commandLineArgs(optionDefinitions);
-    cmdLineManager.validateMandatory(null, options);
-
     let appConfiguration = container.get<AppConfiguration>(TYPES.AppConfiguration);
+    let processController = container.get<ProcessController>(TYPES.ProcessController);
+    /* End - retrieve objects from container that are needed in this method */
+
+    /* Start - process CLI parameters */
+    let optionDefinitions: commandLineArgs.OptionDefinition[] = cmdLineManager.getNoMandatoryFlagCmdLineOptionDefinitions();
+    const options = commandLineArgs(optionDefinitions);
+    cmdLineManager.validateMandatory(options);
+    /* End - process CLI parameters */
 
     let processCode = options['process-code'];
 
+
+    console.log(options);
+
+    //processController.delegate()
 
 
     let mainContainer: interfaces.Container;

@@ -1,44 +1,58 @@
 import { CmdLineOptionDefinition } from "./cmdline.optiondefinition";
 import commandLineArgs = require('command-line-args');
-import { injectable } from "inversify";
+import { injectable, inject } from "inversify";
+import TYPES from "../configuration/types";
+import { AppConfiguration } from "../configuration/app.configuration";
 
 export interface CmdLineManager
 {
-    validateMandatory(otherCmdLineOptionDefinitions: Array<CmdLineOptionDefinition>, 
-        checkAgainst: commandLineArgs.CommandLineOptions);
+    validateMandatory(checkAgainst: commandLineArgs.CommandLineOptions);
 
     getCmdLineOptionDefinitions():  Array<CmdLineOptionDefinition>;
+
+    getNoMandatoryFlagCmdLineOptionDefinitions(): Array<commandLineArgs.OptionDefinition>;
 } 
 
 @injectable()
 export class CmdLineManagerImpl implements CmdLineManager
 {
-    // Default global parameters
-    readonly cmdLineOptionDefinitions: Array<CmdLineOptionDefinition> = [
-        new CmdLineOptionDefinition({ name: 'process-code', type: String}, true),
-        new CmdLineOptionDefinition({ name: 'output-dir', type: String}, true),
-        new CmdLineOptionDefinition( { name: 'input-file', type: String}, true),
-    ];
+     private _appConfiguration: AppConfiguration;
 
+
+    // Default global parameters
+    cmdLineOptionDefinitions: Array<CmdLineOptionDefinition>;
+
+    constructor(@inject(TYPES.AppConfiguration) appConfiguration: AppConfiguration)
+    {
+        this._appConfiguration = appConfiguration;
+        this.cmdLineOptionDefinitions = this._appConfiguration.getConfig().customCmdLineOptionDefinition;
+    }
+    
     getCmdLineOptionDefinitions():  Array<CmdLineOptionDefinition>
     {
         return this.cmdLineOptionDefinitions;
     }
 
+    getNoMandatoryFlagCmdLineOptionDefinitions(): Array<commandLineArgs.OptionDefinition>
+    {
+        let optionDefinitionsWithNoMandatoryFlag: commandLineArgs.OptionDefinition[] = [];
+
+        for (let option of this.getCmdLineOptionDefinitions()) {
+            optionDefinitionsWithNoMandatoryFlag.push(option.getOptionDefinition());
+        }
+    
+        return optionDefinitionsWithNoMandatoryFlag;
+    }
+
     /**
-     * Validate provided CLI parameters in checkAgainst against cmdLineOptionDefinitions and otherCmdLineOptionDefinitions (if available)
+     * Validate provided CLI parameters in checkAgainst against cmdLineOptionDefinitions
      * 
      * @param otherCmdLineOptionDefinitions 
      * @param checkAgainst 
      */
-    validateMandatory(otherCmdLineOptionDefinitions: Array<CmdLineOptionDefinition>, checkAgainst: commandLineArgs.CommandLineOptions): void
+    validateMandatory(checkAgainst: commandLineArgs.CommandLineOptions): void
     {
         let clonedTempArray: Array<CmdLineOptionDefinition> = this.cmdLineOptionDefinitions;
-
-        if(otherCmdLineOptionDefinitions != null)
-        {
-            clonedTempArray = clonedTempArray.concat(otherCmdLineOptionDefinitions);
-        }
 
         for(let option of clonedTempArray)
         {

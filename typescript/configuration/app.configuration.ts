@@ -14,7 +14,10 @@ export interface AppConfiguration
 @injectable()
 export class AppConfigurationImpl implements AppConfiguration
 {
-    // new Creator(MyCustomProcess01).getNew()
+    constructor()
+    {
+        console.log('AppConfigurationImpl:constructor()');
+    }
 
     /**
      * Process Definitions
@@ -26,7 +29,12 @@ export class AppConfigurationImpl implements AppConfiguration
                 let container = new Container();
                 container.bind<Process>(TYPES.Process).to(MyCustomProcess01);
                 return container;
-            }),
+            },
+            [
+                new CmdLineOptionDefinition({ name: 'a', type: String}, true),
+                new CmdLineOptionDefinition({ name: 'b', type: String}, true),
+                new CmdLineOptionDefinition( { name: 'c', type: String}, true),
+            ]),
             
         new ProcessModel('THIS_02', 
             () : Container => 
@@ -34,17 +42,18 @@ export class AppConfigurationImpl implements AppConfiguration
                 let container = new Container();
                 container.bind<Process>(TYPES.Process).to(MyCustomProcess01);
                 return container;
-            })
+            },
+        [])
     ];
 
 
     /**
-     * Global custom command-line parameters
+     * Global command-line parameters
      */
     private customCmdLineOptionDefinition: Array<CmdLineOptionDefinition> = [
-        new CmdLineOptionDefinition({ name: 'custom-global-param-01', type: String}, true),
-        new CmdLineOptionDefinition({ name: 'custom-global-param-02', type: String}, true),
-        new CmdLineOptionDefinition( { name: 'custom-global-param-03', type: String}, true),
+        new CmdLineOptionDefinition({ name: 'process-code', type: String}, true),
+        new CmdLineOptionDefinition({ name: 'output-dir', type: String}, true),
+        new CmdLineOptionDefinition( { name: 'input-file', type: String}, true),
     ];
 
     public getConfig(): any
