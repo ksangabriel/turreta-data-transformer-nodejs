@@ -1,5 +1,7 @@
 import { Process } from "../common/process/process.interface";
+import { injectable } from "inversify";
 
+@injectable()
 export class MyCustomProcess01 implements Process
 {
     public getName()

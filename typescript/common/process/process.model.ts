@@ -1,10 +1,11 @@
 import { Process } from "./process.interface";
 import { CmdLineOptionDefinition } from "../../cmdline/cmdline.optiondefinition";
+import { Container } from "inversify";
 
 export class ProcessModel
 {
     private processCode: string;
-    private processClassType: Process;
+    private processContainer: () => Container;
 
     /**
      * Process-specific custom command-line parameters
@@ -12,11 +13,11 @@ export class ProcessModel
     private processCmdLineOptionDefinitions: Array<CmdLineOptionDefinition>;
 
     constructor(processCode: string, 
-        processClassType: Process, processCmdLineOptionDefinitions?: Array<CmdLineOptionDefinition>)
+        processClassType: () => Container, processCmdLineOptionDefinitions?: Array<CmdLineOptionDefinition>)
     {
         this.processCode = processCode;
-        this.processClassType = processClassType;
         this.processCmdLineOptionDefinitions = processCmdLineOptionDefinitions;
+        this.processContainer = processClassType;
     }
 
     public getProcessCode(): string
@@ -24,9 +25,9 @@ export class ProcessModel
         return this.processCode;
     }
 
-    public getProcessClassType(): Process
+    public getContainer(): Container
     {
-        return this.processClassType;
+        return this.processContainer();
     }
 
 }

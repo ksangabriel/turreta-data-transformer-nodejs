@@ -1,8 +1,10 @@
 import { MyCustomProcess01 } from "../custom/mycustom.process";
 import { CmdLineOptionDefinition } from "../cmdline/cmdline.optiondefinition";
 import { ProcessModel } from "../common/process/process.model";
-import { injectable } from "inversify";
+import { injectable, Container } from "inversify";
 import { Creator } from "../common/instance.loader";
+import { Process } from "../common/process/process.interface";
+import TYPES from "./types";
 
 export interface AppConfiguration
 {
@@ -12,12 +14,27 @@ export interface AppConfiguration
 @injectable()
 export class AppConfigurationImpl implements AppConfiguration
 {
+    // new Creator(MyCustomProcess01).getNew()
 
     /**
      * Process Definitions
      */
     private processList: Array<ProcessModel> = [
-        new ProcessModel('THIS_01', new Creator(MyCustomProcess01).getNew())
+        new ProcessModel('THIS_01', 
+            () : Container => 
+            {
+                let container = new Container();
+                container.bind<Process>(TYPES.Process).to(MyCustomProcess01);
+                return container;
+            }),
+            
+        new ProcessModel('THIS_02', 
+            () : Container => 
+            {
+                let container = new Container();
+                container.bind<Process>(TYPES.Process).to(MyCustomProcess01);
+                return container;
+            })
     ];
 
 
