@@ -8,6 +8,8 @@ import { ProcessController, ProcessControllerImpl } from "../common/process/proc
 /**
  * The main Container object for the whole application. Other Container objects are 
  * temporary.
+ *
+ * Does the container re-autowire when a new bean is bound?
  */
 let container = new Container({ defaultScope: "Singleton" });
 

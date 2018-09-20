@@ -9,9 +9,10 @@ export class FieldToLineExtractedValue
     private fieldToLineModel: FieldToLineSubstringModel;
     private extractedValue: string;
 
-    constructor(fieldToLineModel: FieldToLineSubstringModel)
+    constructor(fieldToLineModel: FieldToLineSubstringModel, extractedValue: string)
     {
         this.fieldToLineModel = fieldToLineModel;
+        this.extractedValue = extractedValue;
     }
 }
 

@@ -1,4 +1,4 @@
-import { MyCustomProcess01 } from "../custom/mycustom.process";
+import { MyCustomProcess01 } from "../custom/process/mycustom.process";
 import { CmdLineOptionDefinition } from "../cmdline/cmdline.optiondefinition";
 import { ProcessModel } from "../common/process/process.model";
 import { injectable, Container } from "inversify";

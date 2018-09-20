@@ -50,6 +50,8 @@ class MainClass {
 
     let process: Process = mainContainer.get<Process>(TYPES.Process);
 
+    processController.delegate(options, process)
+
     console.log('Process:' + process.getName());
 
 
