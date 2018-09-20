@@ -8,7 +8,6 @@ export class FieldToLineManager
     {
         let extractedFields : FieldToLineExtractedValue[] = [];
 
-        console.log('dddd' + fieldToLineSubstringModels);
         for(let model of fieldToLineSubstringModels)
         {
             let substrFromLine: string = line.substring(model.fieldStartLocAtIndex, model.fieldEndLocAtIndex);

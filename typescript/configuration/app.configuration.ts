@@ -1,4 +1,4 @@
-import { MyCustomProcess01 } from "../custom/process/mycustom.process";
+import { FieldMappedTextFileToCSVFileProces } from "../custom/process/mycustom.process";
 import { CmdLineOptionDefinition } from "../cmdline/cmdline.optiondefinition";
 import { ProcessModel } from "../common/process/process.model";
 import { injectable, Container } from "inversify";
@@ -23,11 +23,11 @@ export class AppConfigurationImpl implements AppConfiguration
      * Process Definitions
      */
     private processList: Array<ProcessModel> = [
-        new ProcessModel('THIS_01', 
+        new ProcessModel('PROCESS-01', 
             () : Container => 
             {
                 let container = new Container();
-                container.bind<Process>(TYPES.Process).to(MyCustomProcess01);
+                container.bind<Process>(TYPES.Process).to(FieldMappedTextFileToCSVFileProces);
                 return container;
             },
             [
@@ -35,15 +35,6 @@ export class AppConfigurationImpl implements AppConfiguration
                 new CmdLineOptionDefinition({ name: 'b', type: String}, true),
                 new CmdLineOptionDefinition( { name: 'c', type: String}, true),
             ]),
-            
-        new ProcessModel('THIS_02', 
-            () : Container => 
-            {
-                let container = new Container();
-                container.bind<Process>(TYPES.Process).to(MyCustomProcess01);
-                return container;
-            },
-        [])
     ];
 
 

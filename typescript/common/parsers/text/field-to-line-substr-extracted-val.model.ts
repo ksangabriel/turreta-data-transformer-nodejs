@@ -14,6 +14,15 @@ export class FieldToLineExtractedValue
         this.fieldToLineModel = fieldToLineModel;
         this.extractedValue = extractedValue;
     }
+
+    public getFieldToLineModel(): FieldToLineSubstringModel
+    {
+        return this.fieldToLineModel;
+    }
+
+    public getExtractedValue(): string {
+        return this.extractedValue;
+    }
 }
 
 

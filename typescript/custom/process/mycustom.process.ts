@@ -9,12 +9,15 @@ import { FieldToLineSubstringModel } from "../../common/parsers/text/field-to-li
 import { FieldToLineManager } from "../../common/parsers/text/field-to-line.manager";
 
 @injectable()
-export class MyCustomProcess01 implements Process
+export class FieldMappedTextFileToCSVFileProces implements Process
 {
     private _appConfiguration: AppConfiguration;
     private fieldToLineSubstringModels: FieldToLineSubstringModel[] = [
         new FieldToLineSubstringModel("Field1", 0, 10),
-        new FieldToLineSubstringModel("Field2", 10, 20)
+        new FieldToLineSubstringModel("Field2", 10, 20),
+        new FieldToLineSubstringModel("Field3", 20, 30),
+        new FieldToLineSubstringModel("Field4", 30, 40),
+        new FieldToLineSubstringModel("Field5", 40, 50)
     ];
 
     constructor(@inject(TYPES.AppConfiguration) appConfiguration: AppConfiguration)
@@ -24,7 +27,7 @@ export class MyCustomProcess01 implements Process
     public getName()
     {
         console.log(this._appConfiguration.getConfig());
-        return 'MyCustomProcess01';
+        return 'This converts a field-mapped text file to a csv file';
     }
 
     public execute(options: CommandLineOptions): void
@@ -38,14 +41,24 @@ export class MyCustomProcess01 implements Process
 
         let fieldToLineManager: FieldToLineManager = new FieldToLineManager();
 
+        let headers = this.fieldToLineSubstringModels.map(model => model.fieldName);
+        let csvWriter = require('csv-write-stream')
+        let writer = csvWriter({ headers: headers});
+
+        let fs = require("fs");
+
         let self = this;
+        writer.pipe(fs.createWriteStream('out.csv'))
         lr.on('line', function (line) 
         {
            let el = fieldToLineManager.extractFields(line, self.fieldToLineSubstringModels);
-           console.log(el);
+           console.log(el[0].getExtractedValue());
+           writer.write(el.map(model => model.getExtractedValue()));
         });
         
+
         lr.on('end', function () {
+            writer.end();
         });
     }
 }
