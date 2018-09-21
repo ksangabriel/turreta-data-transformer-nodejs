@@ -46,9 +46,10 @@ export class FieldMappedTextFileToCSVFileProces implements Process
         let writer = csvWriter({ headers: headers});
 
         let fs = require("fs");
+        let uuidv1 = require("uuid/v1");
 
         let self = this;
-        writer.pipe(fs.createWriteStream('out.csv'))
+        writer.pipe(fs.createWriteStream(uuidv1() + 'out.csv'))
         lr.on('line', function (line) 
         {
            let el = fieldToLineManager.extractFields(line, self.fieldToLineSubstringModels);
