@@ -2,7 +2,11 @@
     "compilerOptions": {
         "target": "es5",
         "lib": ["es6"],
-        "types": ["reflect-metadata"],
+        "types": ["reflect-metadata", "node"],
+        "typeRoots": [
+            // add path to @types
+            "node_modules/@types"
+         ],
         "module": "commonjs",
         "moduleResolution": "node",
         "experimentalDecorators": true,
