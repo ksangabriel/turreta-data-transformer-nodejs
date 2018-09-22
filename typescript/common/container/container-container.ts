@@ -6,6 +6,9 @@ import { AppConfigurationImpl, AppConfiguration } from "../../configuration/app.
 import { ProcessController, ProcessControllerImpl } from "../process/process.controller";
 import { ProcessConfiguration, ProcessConfigurationImpl } from "../../configuration/process.configuration";
 
+/**
+ * This encapsulates the inversify Container
+ */
 export class ContainerContainer
 {
     private container: Container;
