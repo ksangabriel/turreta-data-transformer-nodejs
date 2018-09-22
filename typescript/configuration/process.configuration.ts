@@ -6,7 +6,7 @@ import { FieldMappedTextFileToCSVFileProces } from "../custom/process/fieldmappe
 
 export interface ProcessConfiguration
 {
-
+    getConfig(): any;
 }
 
 @injectable()

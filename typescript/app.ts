@@ -20,11 +20,13 @@ class MainClass
   public main(): number 
   {
 
-    let container = this.containerContainer.getContainer();
+    let container:Container = this.containerContainer.getContainer();
+
+    console.log('container:' + container);
 
     /* Start - retrieve objects from container that are needed in this method */
     let cmdLineManager: CmdLineManager = container.get<CmdLineManager>(TYPES.CmdLineManager);
-    let processConfiguration = container.get<ProcessConfiguration>(TYPES.ProcessConfiguration);
+    let processConfiguration: ProcessConfiguration = container.get<ProcessConfiguration>(TYPES.ProcessConfiguration);
     let appConfiguration = container.get<AppConfiguration>(TYPES.AppConfiguration);
     let processController = container.get<ProcessController>(TYPES.ProcessController);
     /* End - retrieve objects from container that are needed in this method */
@@ -45,7 +47,7 @@ class MainClass
 
     let mainContainer: interfaces.Container;
 
-    let processModelList: Array<ProcessModel> = appConfiguration.getConfig().processList;
+    let processModelList: Array<ProcessModel> = processConfiguration.getConfig().processList;
 
     for (let processModel of processModelList) {
       if (processModel.getProcessCode() === processCode) {

@@ -7,6 +7,7 @@
             // add path to @types
             "node_modules/@types"
          ],
+       //  "esModuleInterop": true,
         "module": "commonjs",
         "moduleResolution": "node",
         "experimentalDecorators": true,

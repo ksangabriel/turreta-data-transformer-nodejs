@@ -21,12 +21,12 @@ export class ContainerContainer
          *
          * Does the container re-autowire when a new bean is bound?
          */
-        let container = new Container();
+        this.container = new Container();
 
-        container.bind<ProcessConfiguration>(TYPES.ProcessConfiguration).to(ProcessConfigurationImpl);
-        container.bind<AppConfiguration>(TYPES.AppConfiguration).to(AppConfigurationImpl);
-        container.bind<CmdLineManager>(TYPES.CmdLineManager).to(CmdLineManagerImpl);
-        container.bind<ProcessController>(TYPES.ProcessController).to(ProcessControllerImpl);
+        this.container.bind<ProcessConfiguration>(TYPES.ProcessConfiguration).to(ProcessConfigurationImpl);
+        this.container.bind<AppConfiguration>(TYPES.AppConfiguration).to(AppConfigurationImpl);
+        this.container.bind<CmdLineManager>(TYPES.CmdLineManager).to(CmdLineManagerImpl);
+        this.container.bind<ProcessController>(TYPES.ProcessController).to(ProcessControllerImpl);
 
     }
 
