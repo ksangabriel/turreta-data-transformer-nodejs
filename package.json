@@ -11,6 +11,7 @@
   "dependencies": {
     "@types/command-line-args": "^5.0.0",
     "@types/xml2js": "^0.4.3",
+    "archiver": "^3.0.0",
     "command-line-args": "^5.0.2",
     "csv-write-stream": "^2.0.0",
     "grunt": "^1.0.3",
@@ -21,5 +22,8 @@
     "reflect-metadata": "^0.1.12",
     "typescript": "^3.0.3",
     "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "grunt-contrib-concat": "^1.0.1"
   }
 }

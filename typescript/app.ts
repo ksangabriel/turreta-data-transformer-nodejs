@@ -1,23 +1,30 @@
 import { XmlParser } from "./common/parsers/xml/xmlparser";
-import { Parser } from "xml2js";
 import commandLineArgs = require('command-line-args');
-import { OptionDefinition, CommandLineOptions, ParseOptions } from "command-line-args";
 import { AppConfiguration } from "./configuration/app.configuration";
 
-import container from "./configuration/inversify.config";
+//import container from "./configuration/inversify.config";
 import TYPES from "./configuration/types";
 import { CmdLineManager } from "./cmdline/cmdline.manager";
 import { Process } from "./common/process/process.interface";
 import { Container, interfaces } from "inversify";
 import { ProcessModel } from "./common/process/process.model";
 import { ProcessController } from "./common/process/process.controller";
+import { ProcessConfiguration } from "./configuration/process.configuration";
+import { ContainerContainer } from "./common/container/container-container";
 
 
-class MainClass {
-  public main(): number {
+class MainClass 
+{
+  private containerContainer: ContainerContainer = new ContainerContainer();
+
+  public main(): number 
+  {
+
+    let container = this.containerContainer.getContainer();
 
     /* Start - retrieve objects from container that are needed in this method */
     let cmdLineManager: CmdLineManager = container.get<CmdLineManager>(TYPES.CmdLineManager);
+    let processConfiguration = container.get<ProcessConfiguration>(TYPES.ProcessConfiguration);
     let appConfiguration = container.get<AppConfiguration>(TYPES.AppConfiguration);
     let processController = container.get<ProcessController>(TYPES.ProcessController);
     /* End - retrieve objects from container that are needed in this method */
@@ -80,9 +87,16 @@ class MainClass {
 
     return 0;
   }
+
+  static o()
+  {
+    console.log('ddd');
+  }
 }
 
 let mainClass = new MainClass();
+
+MainClass.o();
 mainClass.main();
 
 

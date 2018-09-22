@@ -5,10 +5,10 @@ module.exports = function(grunt)
 		grunt.initConfig({
 			ts: {
 			  main : {
-				tsconfig: './tsconfig.json',
-				src:['typescript/**/*.ts'],
-					dest:'dist/'
-			  }
+					tsconfig: './tsconfig.json',
+					src:['typescript/**/*.ts'],
+					dest:'dist/',
+				},
 			}
 		  });
 		  grunt.loadNpmTasks("grunt-ts");

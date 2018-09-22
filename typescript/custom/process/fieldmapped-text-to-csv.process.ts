@@ -1,12 +1,11 @@
 import { Process } from "../../common/process/process.interface";
 import { injectable, inject } from "inversify";
 import { AppConfiguration } from "../../configuration/app.configuration";
-import TYPES from "../../configuration/types";
 import { CommandLineOptions } from "command-line-args";
-
-import * as LineByLineReader  from "line-by-line";
 import { FieldToLineSubstringModel } from "../../common/parsers/text/field-to-line-substr.model";
 import { FieldToLineManager } from "../../common/parsers/text/field-to-line.manager";
+import TYPES from "../../configuration/types";
+import * as LineByLineReader  from "line-by-line";
 
 @injectable()
 export class FieldMappedTextFileToCSVFileProces implements Process
@@ -49,7 +48,7 @@ export class FieldMappedTextFileToCSVFileProces implements Process
         let uuidv1 = require("uuid/v1");
 
         let self = this;
-        writer.pipe(fs.createWriteStream(uuidv1() + 'out.csv'))
+        writer.pipe(fs.createWriteStream(options['output-dir'] + uuidv1() + '/out.csv'))
         lr.on('line', function (line) 
         {
            let el = fieldToLineManager.extractFields(line, self.fieldToLineSubstringModels);
