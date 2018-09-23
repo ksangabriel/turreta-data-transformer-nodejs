@@ -21,6 +21,7 @@
     "inversify": "^4.13.0",
     "line-by-line": "^0.1.6",
     "reflect-metadata": "^0.1.12",
+    "soap": "^0.25.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {

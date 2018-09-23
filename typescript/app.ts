@@ -98,8 +98,24 @@ class MainClass
 
 let mainClass = new MainClass();
 
-MainClass.o();
-mainClass.main();
+// MainClass.o();
+// mainClass.main();
 
 
+// let soap = require('soap');
+// let url = 'http://www.dneonline.com/calculator.asmx?wsdl';
+// let args = {intA: 1, intB: 4};
+// soap.createClient(url, function(err, client) {
+//     client.Add(args, function(err, result) {
+//         console.log(result);
+//     });
+// });
 
+let soap = require('soap');
+let url = 'https://soap.aspsms.com/aspsmsx2.asmx?wsdl';
+let args = {UserKey: 'userkey', Password: 'password'};
+soap.createClient(url, function(err, client) {
+    client.CheckCredits(args, function(err, result) {
+        console.log(result);
+    });
+});
