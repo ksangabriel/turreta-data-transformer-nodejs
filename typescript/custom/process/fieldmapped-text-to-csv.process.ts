@@ -54,7 +54,7 @@ export class FieldMappedTextFileToCSVFileProces implements Process
         lr.on('line', function (line) 
         {
            let el = fieldToLineManager.extractFields(line, self.fieldToLineSubstringModels);
-           console.log(el[0].getExtractedValue());
+           //console.log(el[0].getExtractedValue());
            writer.write(el.map(model => model.getExtractedValue()));
         });
         

@@ -66,7 +66,7 @@ class MainClass
 
     let appConfig: AppConfiguration = appConfiguration;
 
-    let checkProcessCode = processCodeParam => appConfig.getConfig().processList.some(({ process_code }) => process_code === processCodeParam)
+    let checkProcessCode = processCodeParam => appConfig.getConfig().processList.some(  ({ process_code }) => process_code === processCodeParam)
 
     // if(!checkProcessCode(processCode))
     // {
@@ -98,8 +98,8 @@ class MainClass
 
 let mainClass = new MainClass();
 
-// MainClass.o();
-// mainClass.main();
+MainClass.o();
+mainClass.main();
 
 
 // let soap = require('soap');
@@ -111,11 +111,11 @@ let mainClass = new MainClass();
 //     });
 // });
 
-let soap = require('soap');
-let url = 'https://soap.aspsms.com/aspsmsx2.asmx?wsdl';
-let args = {UserKey: 'userkey', Password: 'password'};
-soap.createClient(url, function(err, client) {
-    client.CheckCredits(args, function(err, result) {
-        console.log(result);
-    });
-});
+// let soap = require('soap');
+// let url = 'https://soap.aspsms.com/aspsmsx2.asmx?wsdl';
+// let args = {UserKey: 'userkey', Password: 'password'};
+// soap.createClient(url, function(err, client) {
+//     client.CheckCredits(args, function(err, result) {
+//         console.log(result);
+//     });
+// });

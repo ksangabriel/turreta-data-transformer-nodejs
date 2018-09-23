@@ -19,7 +19,7 @@ export class AppConfigurationImpl implements AppConfiguration
      */
     private customCmdLineOptionDefinition: Array<CmdLineOptionDefinition> = [
         new CmdLineOptionDefinition({ name: 'process-code', type: String}, true),
-        new CmdLineOptionDefinition({ name: 'output-dir', type: String}, true),
+        new CmdLineOptionDefinition({ name: 'output-dir', type: String}, false),
         new CmdLineOptionDefinition( { name: 'input-file', type: String}, true),
     ];
 

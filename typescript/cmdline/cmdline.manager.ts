@@ -3,6 +3,8 @@ import commandLineArgs = require('command-line-args');
 import { injectable, inject } from "inversify";
 import TYPES from "../configuration/types";
 import { AppConfiguration } from "../configuration/app.configuration";
+import { ProcessConfiguration } from "../configuration/process.configuration";
+import { ProcessModel } from "../common/process/process.model";
 
 export interface CmdLineManager
 {
@@ -17,14 +19,17 @@ export interface CmdLineManager
 export class CmdLineManagerImpl implements CmdLineManager
 {
      private _appConfiguration: AppConfiguration;
+     private _processConfiguration: ProcessConfiguration;
 
 
     // Default global parameters
     cmdLineOptionDefinitions: Array<CmdLineOptionDefinition>;
 
-    constructor(@inject(TYPES.AppConfiguration) appConfiguration: AppConfiguration)
+    constructor(@inject(TYPES.AppConfiguration) appConfiguration: AppConfiguration,
+                @inject(TYPES.ProcessConfiguration) processConfiguration: ProcessConfiguration)
     {
         this._appConfiguration = appConfiguration;
+        this._processConfiguration = processConfiguration;
         this.cmdLineOptionDefinitions = this._appConfiguration.getConfig().customCmdLineOptionDefinition;
     }
     
@@ -54,7 +59,24 @@ export class CmdLineManagerImpl implements CmdLineManager
     {
         let clonedTempArray: Array<CmdLineOptionDefinition> = this.cmdLineOptionDefinitions;
 
-        for(let option of clonedTempArray)
+        let processModelArray: Array<ProcessModel> = this._processConfiguration.getConfig().processList;
+
+
+        let fnGetProcessModel = function(pocessModels: Array<ProcessModel>, processCode: string)
+        {
+            let f = function(e)
+            {
+                return e.getProcessCode() === processCode;
+            }
+            return pocessModels.find(f);
+        }
+        
+       
+        let processModel: ProcessModel = fnGetProcessModel(processModelArray, checkAgainst['process-code'])
+
+
+        /* Concat global param options and process-specific param options */
+        for(let option of clonedTempArray.concat(processModel.getprocessCmdLineOptionDefinitions()))
         {
             if(option.getMandatory())
             {

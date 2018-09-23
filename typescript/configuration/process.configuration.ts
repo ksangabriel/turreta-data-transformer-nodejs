@@ -3,6 +3,7 @@ import { Container, injectable } from "inversify";
 import { Process } from "../common/process/process.interface";
 import TYPES from "./types";
 import { FieldMappedTextFileToCSVFileProces } from "../custom/process/fieldmapped-text-to-csv.process";
+import { CmdLineOptionDefinition } from "../cmdline/cmdline.optiondefinition";
 
 export interface ProcessConfiguration
 {
@@ -24,9 +25,9 @@ export class ProcessConfigurationImpl
                 return container;
             },
             [
-                // new CmdLineOptionDefinition({ name: 'a', type: String}, true),
-                // new CmdLineOptionDefinition({ name: 'b', type: String}, true),
-                // new CmdLineOptionDefinition( { name: 'c', type: String}, true),
+                new CmdLineOptionDefinition({ name: 'a', type: String}, true),
+                new CmdLineOptionDefinition({ name: 'b', type: String}, false),
+                new CmdLineOptionDefinition({ name: 'c', type: String}, false),
             ]),
     ];
 
