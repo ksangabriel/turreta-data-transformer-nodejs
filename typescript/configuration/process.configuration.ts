@@ -25,7 +25,7 @@ export class ProcessConfigurationImpl
                 return container;
             },
             [
-                new CmdLineOptionDefinition({ name: 'a', type: String}, true),
+                new CmdLineOptionDefinition({ name: 'a', type: String}, false),
                 new CmdLineOptionDefinition({ name: 'b', type: String}, false),
                 new CmdLineOptionDefinition({ name: 'c', type: String}, false),
             ]),
