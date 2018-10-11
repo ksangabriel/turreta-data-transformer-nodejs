@@ -1,37 +1,43 @@
 import { Container } from "inversify";
-import TYPES from "../../configuration/types";
 import "reflect-metadata";
 import { CmdLineManager, CmdLineManagerImpl } from "../../cmdline/cmdline.manager";
 import { AppConfigurationImpl, AppConfiguration } from "../../configuration/app.configuration";
 import { ProcessController, ProcessControllerImpl } from "../process/process.controller";
 import { ProcessConfiguration, ProcessConfigurationImpl } from "../../configuration/process.configuration";
+import TYPES from "../../configuration/types";
+import { Processes } from "../../custom/processes";
 
 /**
  * This encapsulates the inversify Container
  */
 export class ContainerContainer
 {
-    private container: Container;
+    private static container: Container;
 
-    constructor()
+
+    static get instance(): Container
     {
-        /**
-         * The main Container object for the whole application. Other Container objects are 
-         * temporary.
-         *
-         * Does the container re-autowire when a new bean is bound?
-         */
-        this.container = new Container();
+        if(!ContainerContainer.container)
+        {
+            ContainerContainer.createAndConfigure();
+        }
 
-        this.container.bind<ProcessConfiguration>(TYPES.ProcessConfiguration).to(ProcessConfigurationImpl);
-        this.container.bind<AppConfiguration>(TYPES.AppConfiguration).to(AppConfigurationImpl);
-        this.container.bind<CmdLineManager>(TYPES.CmdLineManager).to(CmdLineManagerImpl);
-        this.container.bind<ProcessController>(TYPES.ProcessController).to(ProcessControllerImpl);
-
+        return ContainerContainer.container;
     }
-
-    public getContainer() : Container
+    /**
+     * Create and configure Inversify container
+     */
+    private static createAndConfigure()
     {
-        return this.container;
+        ContainerContainer.container = new Container();
+        ContainerContainer.container.bind<ProcessConfiguration>(TYPES.ProcessConfiguration).to(ProcessConfigurationImpl);
+        ContainerContainer.container.bind<AppConfiguration>(TYPES.AppConfiguration).to(AppConfigurationImpl);
+        ContainerContainer.container.bind<CmdLineManager>(TYPES.CmdLineManager).to(CmdLineManagerImpl);
+        ContainerContainer.container.bind<ProcessController>(TYPES.ProcessController).to(ProcessControllerImpl);
+
+        ContainerContainer.container.bind<Processes>(TYPES.Processes).to(ProcessControllerImpl);
+
     }
 }
+
+

@@ -1,18 +1,14 @@
 import { CmdLineOptionDefinition } from "./cmdline.optiondefinition";
 import commandLineArgs = require('command-line-args');
 import { injectable, inject } from "inversify";
-import TYPES from "../configuration/types";
 import { AppConfiguration } from "../configuration/app.configuration";
 import { ProcessConfiguration } from "../configuration/process.configuration";
 import { ProcessModel } from "../common/process/process.model";
+import TYPES from "../configuration/types";
 
 export interface CmdLineManager
 {
-    validateMandatory(checkAgainst: commandLineArgs.CommandLineOptions);
-
-    getCmdLineOptionDefinitions():  Array<CmdLineOptionDefinition>;
-
-    getNoMandatoryFlagCmdLineOptionDefinitions(): Array<commandLineArgs.OptionDefinition>;
+    validate(): commandLineArgs.CommandLineOptions;
 } 
 
 @injectable()
@@ -33,12 +29,22 @@ export class CmdLineManagerImpl implements CmdLineManager
         this.cmdLineOptionDefinitions = this._appConfiguration.getConfig().customCmdLineOptionDefinition;
     }
     
-    getCmdLineOptionDefinitions():  Array<CmdLineOptionDefinition>
+
+    validate(): commandLineArgs.CommandLineOptions
+    {
+        let optionDefinitions: commandLineArgs.OptionDefinition[] = this.getNoMandatoryFlagCmdLineOptionDefinitions();
+        const options = commandLineArgs(optionDefinitions);
+        this.validateMandatory(options);
+
+        return options;
+    }
+
+    private getCmdLineOptionDefinitions():  Array<CmdLineOptionDefinition>
     {
         return this.cmdLineOptionDefinitions;
     }
 
-    getNoMandatoryFlagCmdLineOptionDefinitions(): Array<commandLineArgs.OptionDefinition>
+    private getNoMandatoryFlagCmdLineOptionDefinitions(): Array<commandLineArgs.OptionDefinition>
     {
         let optionDefinitionsWithNoMandatoryFlag: commandLineArgs.OptionDefinition[] = [];
 
@@ -55,12 +61,11 @@ export class CmdLineManagerImpl implements CmdLineManager
      * @param otherCmdLineOptionDefinitions 
      * @param checkAgainst 
      */
-    validateMandatory(checkAgainst: commandLineArgs.CommandLineOptions): void
+    private validateMandatory(checkAgainst: commandLineArgs.CommandLineOptions): void
     {
         let clonedTempArray: Array<CmdLineOptionDefinition> = this.cmdLineOptionDefinitions;
 
-        let processModelArray: Array<ProcessModel> = this._processConfiguration.getConfig().processList;
-
+        let processModelArray: Array<ProcessModel> = this._processConfiguration.getProcessList();
 
         let fnGetProcessModel = function(pocessModels: Array<ProcessModel>, processCode: string)
         {

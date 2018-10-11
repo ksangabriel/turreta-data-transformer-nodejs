@@ -11,28 +11,28 @@ export class ContainerContainerTest {
 
     public static allTests() {
 
-        let containerContainer: ContainerContainer = new ContainerContainer();
-        let container: Container = containerContainer.getContainer();
+        // let containerContainer: ContainerContainer = new ContainerContainer();
+        // let container: Container = containerContainer.getContainer();
 
-        describe('ContainerContainerTest', () => {
+        // describe('ContainerContainerTest', () => {
 
-            it('should return instance of AppConfigurationImpl', () => {
+        //     it('should return instance of AppConfigurationImpl', () => {
 
-                console.log(container);
-                let config: AppConfiguration = container.get<AppConfiguration>(TYPES.AppConfiguration);
-                expect(config).to.be.instanceOf(AppConfigurationImpl);
-            });
-        });
+        //         console.log(container);
+        //         let config: AppConfiguration = container.get<AppConfiguration>(TYPES.AppConfiguration);
+        //         expect(config).to.be.instanceOf(AppConfigurationImpl);
+        //     });
+        // });
 
-        describe('ContainerContainerTest', () => {
+        // describe('ContainerContainerTest', () => {
 
-            it('should return instance of AppConfigurationImpl', () => {
+        //     it('should return instance of AppConfigurationImpl', () => {
 
-                console.log(container);
-                let config: AppConfiguration = container.get<AppConfiguration>(TYPES.AppConfiguration);
-                expect(config).to.be.instanceOf(AppConfigurationImpl);
-            });
-        });
+        //         console.log(container);
+        //         let config: AppConfiguration = container.get<AppConfiguration>(TYPES.AppConfiguration);
+        //         expect(config).to.be.instanceOf(AppConfigurationImpl);
+        //     });
+        // });
     }
 
 }
