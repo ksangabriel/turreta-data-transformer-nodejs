@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "rootDir": "typescript",
         "target": "es5",
         "lib": ["es6"],
         "types": ["reflect-metadata", "node"],
