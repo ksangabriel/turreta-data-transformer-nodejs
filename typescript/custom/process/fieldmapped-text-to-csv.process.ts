@@ -8,7 +8,7 @@ import TYPES from "../../configuration/types";
 import * as LineByLineReader  from "line-by-line";
 
 @injectable()
-export class FieldMappedTextFileToCSVFileProces implements Process
+export class FieldMappedTextFileToCSVFileProcess implements Process
 {
     private _appConfiguration: AppConfiguration;
     private fieldToLineSubstringModels: FieldToLineSubstringModel[] = [

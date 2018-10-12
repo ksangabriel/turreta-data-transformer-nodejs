@@ -1,7 +1,7 @@
 import { ProcessModel } from "../common/process/process.model";
 import { Container, injectable } from "inversify";
 import { Process } from "../common/process/process.interface";
-import { FieldMappedTextFileToCSVFileProces } from "../custom/process/fieldmapped-text-to-csv.process";
+import { FieldMappedTextFileToCSVFileProcess } from "../custom/process/fieldmapped-text-to-csv.process";
 import { CmdLineOptionDefinition } from "../cmdline/cmdline.optiondefinition";
 
 /**

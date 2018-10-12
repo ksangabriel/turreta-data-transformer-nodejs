@@ -5,7 +5,7 @@ import { AppConfigurationImpl, AppConfiguration } from "../../configuration/app.
 import { ProcessController, ProcessControllerImpl } from "../process/process.controller";
 import { ProcessConfiguration, ProcessConfigurationImpl } from "../../configuration/process.configuration";
 import TYPES from "../../configuration/types";
-import { Processes } from "../../custom/processes";
+import { Processes, ProcessesImpl } from "../../custom/processes";
 
 /**
  * This encapsulates the inversify Container
@@ -29,14 +29,12 @@ export class ContainerContainer
      */
     private static createAndConfigure()
     {
-        ContainerContainer.container = new Container();
+        ContainerContainer.container = new Container({defaultScope: "Singleton"});
         ContainerContainer.container.bind<ProcessConfiguration>(TYPES.ProcessConfiguration).to(ProcessConfigurationImpl);
         ContainerContainer.container.bind<AppConfiguration>(TYPES.AppConfiguration).to(AppConfigurationImpl);
         ContainerContainer.container.bind<CmdLineManager>(TYPES.CmdLineManager).to(CmdLineManagerImpl);
         ContainerContainer.container.bind<ProcessController>(TYPES.ProcessController).to(ProcessControllerImpl);
-
-        ContainerContainer.container.bind<Processes>(TYPES.Processes).to(ProcessControllerImpl);
-
+        ContainerContainer.container.bind<Processes>(TYPES.Processes).to(ProcessesImpl);
     }
 }
 

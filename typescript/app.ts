@@ -1,15 +1,8 @@
-import { XmlParser } from "./common/parsers/xml/xmlparser";
-import commandLineArgs = require('command-line-args');
-import { AppConfiguration } from "./configuration/app.configuration";
+import { Container } from "inversify";
 import TYPES from "./configuration/types";
 import { CmdLineManager } from "./cmdline/cmdline.manager";
-import { Process } from "./common/process/process.interface";
-import { Container, interfaces } from "inversify";
-import { ProcessModel } from "./common/process/process.model";
 import { ProcessController } from "./common/process/process.controller";
-import { ProcessConfiguration } from "./configuration/process.configuration";
 import { ContainerContainer } from "./common/container/container-container";
-
 
 class DataTransformer 
 {

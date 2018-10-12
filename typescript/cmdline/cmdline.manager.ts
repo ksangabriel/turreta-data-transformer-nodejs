@@ -5,6 +5,7 @@ import { AppConfiguration } from "../configuration/app.configuration";
 import { ProcessConfiguration } from "../configuration/process.configuration";
 import { ProcessModel } from "../common/process/process.model";
 import TYPES from "../configuration/types";
+import { Processes } from "../custom/processes";
 
 export interface CmdLineManager
 {
@@ -16,17 +17,20 @@ export class CmdLineManagerImpl implements CmdLineManager
 {
      private _appConfiguration: AppConfiguration;
      private _processConfiguration: ProcessConfiguration;
+     private _processes: Processes;
 
 
     // Default global parameters
     cmdLineOptionDefinitions: Array<CmdLineOptionDefinition>;
 
     constructor(@inject(TYPES.AppConfiguration) appConfiguration: AppConfiguration,
-                @inject(TYPES.ProcessConfiguration) processConfiguration: ProcessConfiguration)
+                @inject(TYPES.ProcessConfiguration) processConfiguration: ProcessConfiguration,
+                @inject(TYPES.Processes) processes: Processes)
     {
         this._appConfiguration = appConfiguration;
         this._processConfiguration = processConfiguration;
         this.cmdLineOptionDefinitions = this._appConfiguration.getConfig().customCmdLineOptionDefinition;
+        this._processes = processes;
     }
     
 
@@ -67,18 +71,21 @@ export class CmdLineManagerImpl implements CmdLineManager
 
         let processModelArray: Array<ProcessModel> = this._processConfiguration.getProcessList();
 
-        let fnGetProcessModel = function(pocessModels: Array<ProcessModel>, processCode: string)
+        let fnGetProcessModel = function(processModels: Array<ProcessModel>, processCode: string)
         {
             let f = function(e)
             {
                 return e.getProcessCode() === processCode;
             }
-            return pocessModels.find(f);
+            return processModels.find(f);
         }
-        
        
         let processModel: ProcessModel = fnGetProcessModel(processModelArray, checkAgainst['process-code'])
 
+        if(!processModel)
+        {
+            throw new Error('Unknown process' + checkAgainst['process-code']);
+        }
 
         /* Concat global param options and process-specific param options */
         for(let option of clonedTempArray.concat(processModel.getprocessCmdLineOptionDefinitions()))

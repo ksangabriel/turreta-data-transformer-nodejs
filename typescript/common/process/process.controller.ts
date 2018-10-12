@@ -6,6 +6,7 @@ import { CommandLineOptions } from "command-line-args";
 import { ProcessConfiguration } from "../../configuration/process.configuration";
 import { ProcessModel } from "./process.model";
 import { ContainerContainer } from "../container/container-container";
+import { FieldMappedTextFileToCSVFileProcess } from "../../custom/process/fieldmapped-text-to-csv.process";
 
 export interface ProcessController
 {
@@ -31,7 +32,11 @@ export class ProcessControllerImpl implements ProcessController
     
         for (let processModel of processModelList) {
           if (processModel.getProcessCode() === cmdLineOptions['process-code']) {
-            console.log("Found!");
+            
+            ContainerContainer.instance.rebind<Process>(TYPES.Process).to(FieldMappedTextFileToCSVFileProcess);
+            let process =  ContainerContainer.instance.get<Process>(TYPES.Process);
+
+            console.log("Found!" + process.getName());
           }
         }
     
