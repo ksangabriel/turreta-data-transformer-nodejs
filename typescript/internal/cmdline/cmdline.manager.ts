@@ -5,7 +5,7 @@ import { AppConfiguration } from "../configuration/app.configuration";
 import { ProcessConfiguration } from "../configuration/process.configuration";
 import { ProcessModel } from "../common/process/process.model";
 import TYPES from "../configuration/types";
-import { Processes } from "../custom/processes";
+import { Processes } from "../../custom/processes";
 
 export interface CmdLineManager
 {
@@ -17,7 +17,6 @@ export class CmdLineManagerImpl implements CmdLineManager
 {
      private _appConfiguration: AppConfiguration;
      private _processConfiguration: ProcessConfiguration;
-     private _processes: Processes;
 
 
     // Default global parameters
@@ -30,7 +29,6 @@ export class CmdLineManagerImpl implements CmdLineManager
         this._appConfiguration = appConfiguration;
         this._processConfiguration = processConfiguration;
         this.cmdLineOptionDefinitions = this._appConfiguration.getConfig().customCmdLineOptionDefinition;
-        this._processes = processes;
     }
     
 
@@ -73,14 +71,14 @@ export class CmdLineManagerImpl implements CmdLineManager
 
         let fnGetProcessModel = function(processModels: Array<ProcessModel>, processCode: string)
         {
-            let f = function(e)
+            let f = function(e: ProcessModel)
             {
                 return e.getProcessCode() === processCode;
             }
             return processModels.find(f);
         }
        
-        let processModel: ProcessModel = fnGetProcessModel(processModelArray, checkAgainst['process-code'])
+        let processModel = fnGetProcessModel(processModelArray, checkAgainst['process-code'])
 
         if(!processModel)
         {

@@ -1,10 +1,10 @@
-import { Process } from "../../common/process/process.interface";
+import { Process } from "../../internal/common/process/process.interface";
 import { injectable, inject } from "inversify";
-import { AppConfiguration } from "../../configuration/app.configuration";
+import { AppConfiguration } from "../../internal/configuration/app.configuration";
 import { CommandLineOptions } from "command-line-args";
-import { FieldToLineSubstringModel } from "../../common/parsers/text/field-to-line-substr.model";
-import { FieldToLineManager } from "../../common/parsers/text/field-to-line.manager";
-import TYPES from "../../configuration/types";
+import { FieldToLineSubstringModel } from "../../internal/common/parsers/text/field-to-line-substr.model";
+import { FieldToLineManager } from "../../internal/common/parsers/text/field-to-line.manager";
+import TYPES from "../../internal/configuration/types";
 import * as LineByLineReader  from "line-by-line";
 
 @injectable()

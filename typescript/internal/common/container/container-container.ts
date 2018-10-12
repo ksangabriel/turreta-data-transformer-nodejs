@@ -5,7 +5,7 @@ import { AppConfigurationImpl, AppConfiguration } from "../../configuration/app.
 import { ProcessController, ProcessControllerImpl } from "../process/process.controller";
 import { ProcessConfiguration, ProcessConfigurationImpl } from "../../configuration/process.configuration";
 import TYPES from "../../configuration/types";
-import { Processes, ProcessesImpl } from "../../custom/processes";
+import { Processes, ProcessesImpl } from "../../../custom/processes";
 
 /**
  * This encapsulates the inversify Container

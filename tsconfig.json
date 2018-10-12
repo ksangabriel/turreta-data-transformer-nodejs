@@ -11,6 +11,11 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "experimentalDecorators": true,
-        "emitDecoratorMetadata": true
+        "emitDecoratorMetadata": true,
+		
+		"forceConsistentCasingInFileNames": true,
+  "noImplicitReturns": true,
+  "strict": true,
+  "noUnusedLocals": true
     }
 }

@@ -1,8 +1,8 @@
 import { Container } from "inversify";
-import TYPES from "./configuration/types";
-import { CmdLineManager } from "./cmdline/cmdline.manager";
-import { ProcessController } from "./common/process/process.controller";
-import { ContainerContainer } from "./common/container/container-container";
+import TYPES from "./internal/configuration/types";
+import { CmdLineManager } from "./internal/cmdline/cmdline.manager";
+import { ProcessController } from "./internal/common/process/process.controller";
+import { ContainerContainer } from "./internal/common/container/container-container";
 
 class DataTransformer 
 {

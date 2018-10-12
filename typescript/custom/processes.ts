@@ -1,7 +1,7 @@
-import { injectable, inject, Container } from "inversify";
-import { ProcessConfiguration } from "../configuration/process.configuration";
-import TYPES from "../configuration/types";
-import { ProcessModel } from "../common/process/process.model";
+import { injectable, inject } from "inversify";
+import { ProcessConfiguration } from "../internal/configuration/process.configuration";
+import TYPES from "../internal/configuration/types";
+import { ProcessModel } from "../internal/common/process/process.model";
 import { FieldMappedTextFileToCSVFileProcess } from "./process/fieldmapped-text-to-csv.process";
 
 export interface Processes

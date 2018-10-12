@@ -1,5 +1,5 @@
 import { CmdLineOptionDefinition } from "../cmdline/cmdline.optiondefinition";
-import { injectable, Container } from "inversify";
+import { injectable } from "inversify";
 
 export interface AppConfiguration
 {
