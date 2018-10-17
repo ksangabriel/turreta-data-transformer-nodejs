@@ -24,7 +24,6 @@ export class CmdLineManagerImpl implements CmdLineManager
      private _appConfiguration: AppConfiguration;
      private _processConfiguration: ProcessConfiguration;
 
-
     // Default global parameters
     cmdLineOptionDefinitions: Array<CmdLineOptionDefinition>;
 
