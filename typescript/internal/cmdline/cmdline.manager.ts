@@ -82,7 +82,10 @@ export class CmdLineManagerImpl implements CmdLineManager
 
         if(!processModel)
         {
-            throw new Error('Unknown process' + checkAgainst['process-code']);
+            let pcStr = processModelArray.map(function(e){ return e.getProcessCode()}).join('\n');
+            throw new Error('Unknown process: ' + checkAgainst['process-code'] 
+                + '. Available process codes are:\n' 
+                + pcStr);
         }
 
         /* Concat global param options and process-specific param options */

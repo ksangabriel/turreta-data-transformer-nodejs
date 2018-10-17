@@ -12,8 +12,15 @@ class DataTransformer
     let cmdLineManager: CmdLineManager = container.get<CmdLineManager>(TYPES.CmdLineManager);
     let processController: ProcessController = container.get<ProcessController>(TYPES.ProcessController);
 
-    let cmdOptions = cmdLineManager.validate();
-    processController.delegate(cmdOptions)
+    try 
+    {
+      let cmdOptions = cmdLineManager.validate();
+      processController.delegate(cmdOptions)
+    }
+    catch(e)
+    {
+      console.log(e.message);
+    }
 
     return 0;
   }
