@@ -1,18 +1,20 @@
 import { CmdLineOptionDefinition } from "../cmdline/cmdline.optiondefinition";
 import { injectable } from "inversify";
 
+/**
+ * Interface - Application Config
+ */
 export interface AppConfiguration
 {
     getConfig(): any;
 }
 
+/**
+ * Implementation - Application Config
+ */
 @injectable()
 export class AppConfigurationImpl implements AppConfiguration
 {
-    constructor()
-    {
-        console.log('AppConfigurationImpl:constructor()');
-    }
 
     /**
      * Global command-line parameters

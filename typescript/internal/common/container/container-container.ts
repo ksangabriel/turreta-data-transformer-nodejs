@@ -6,6 +6,7 @@ import { ProcessController, ProcessControllerImpl } from "../process/process.con
 import { ProcessConfiguration, ProcessConfigurationImpl } from "../../configuration/process.configuration";
 import TYPES from "../../configuration/types";
 import { Processes, ProcessesImpl } from "../../../custom/processes";
+import { LoggerService, LoggerServiceImpl } from "../services/logger.service";
 
 /**
  * This encapsulates the inversify Container
@@ -35,6 +36,7 @@ export class ContainerContainer
         ContainerContainer.container.bind<CmdLineManager>(TYPES.CmdLineManager).to(CmdLineManagerImpl);
         ContainerContainer.container.bind<ProcessController>(TYPES.ProcessController).to(ProcessControllerImpl);
         ContainerContainer.container.bind<Processes>(TYPES.Processes).to(ProcessesImpl);
+        ContainerContainer.container.bind<LoggerService>(TYPES.LoggerService).to(LoggerServiceImpl);
     }
 }
 

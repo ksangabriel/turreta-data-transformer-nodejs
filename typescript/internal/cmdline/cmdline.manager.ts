@@ -7,11 +7,17 @@ import { ProcessModel } from "../common/process/process.model";
 import TYPES from "../configuration/types";
 import { Processes } from "../../custom/processes";
 
+/**
+ * Interface - Command Line Manager
+ */
 export interface CmdLineManager
 {
     validate(): commandLineArgs.CommandLineOptions;
 } 
 
+/**
+ * Implementation - Command Line Manager
+ */
 @injectable()
 export class CmdLineManagerImpl implements CmdLineManager
 {

@@ -5,7 +5,8 @@ let TYPES = {
     Process: Symbol("Process"),
     Processes: Symbol("Processes"),
     ProcessController: Symbol("ProcessController"),
-    CommandLineArgsCommandLineOption: Symbol("commandLineArgs.CommandLineOption")
+    CommandLineArgsCommandLineOption: Symbol("commandLineArgs.CommandLineOption"),
+    LoggerService: Symbol("LoggerService")
 };
 
 export default TYPES;
